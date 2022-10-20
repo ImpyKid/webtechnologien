@@ -1,4 +1,29 @@
 * {
-text-align:center;
-max-width: 900px;
+    text-align: center;
+    max-width: 900px;
+}
+
+body {
+    background-color: #FAFAFA;
+}
+
+fieldset {
+    background-color: white;
+    border: 1px dotted grey;
+}
+
+.btn-grey {
+    background-color: lightgrey;
+    color: white;
+    border: 0px;
+    border-radius: 0%;
+    padding: 5px 10px 5px 10px;
+}
+
+.btn-blue {
+    background-color: blue;
+    color: white;
+    border: 0px;
+    border-radius: 0%;
+    padding: 5px 10px 5px 10px;
 }
