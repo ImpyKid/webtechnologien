@@ -70,3 +70,8 @@ input .wide-text {
 select {
     width: 100%;
 }
+
+h1{
+color: black;
+font-size: 40px;
+}
