@@ -1,7 +1,5 @@
 * {
     font-family: Arial, Helvetica, sans-serif;
-    left: 50%;
-    max-width: 900px;
 }
 
 body {
@@ -57,6 +55,12 @@ hr {
 .item-center {
     text-align: center;
     left: 50%;
+}
+
+.site {
+    left: 50%;
+    max-width: 900px;
+    margin: auto;
 }
 
 input .wide-text {
