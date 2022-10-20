@@ -1,6 +1,6 @@
 * {
     font-family: Arial, Helvetica, sans-serif;
-    margin: auto;
+    left: 50%;
     max-width: 900px;
 }
 
@@ -18,12 +18,12 @@ table td {
     width: 50%;
     text-align: end;
 }
+
 img{
 width: 100px;
 height: 100px;
 border-radius: 50%;
 }
-
 
 hr {
     border: 1px dotted grey;
