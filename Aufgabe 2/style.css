@@ -12,9 +12,13 @@ fieldset {
     margin: 7px;
 }
 
-table td {
-    width: 50%;
-    text-align: end;
+table {
+    width: 100%;
+}
+
+tbody tr td:first-child {
+    text-align: right;
+    padding-right: 10px;
 }
 
 img{
@@ -63,10 +67,7 @@ hr {
     margin: auto;
 }
 
-input .wide-text {
-
-}
-
-select {
-    width: 100%;
+.wide-text {
+    width: 70%;
+    padding: 6px;
 }
