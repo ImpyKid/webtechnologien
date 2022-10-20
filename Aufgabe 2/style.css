@@ -1,5 +1,5 @@
 * {
-    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
     margin: auto;
 }
 
@@ -10,6 +10,7 @@ body {
 fieldset {
     background-color: white;
     border: 1px dotted grey;
+    margin: 7px;
 }
 
 table td {
@@ -44,6 +45,11 @@ hr {
     border-radius: 0%;
     width: 150px;
     padding: 7px 0px 7px 0px;
+}
+
+.action-buttons {
+    text-align: center;
+    left: 50%;
 }
 
 input .wide-text {
