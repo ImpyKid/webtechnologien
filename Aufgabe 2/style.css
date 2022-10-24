@@ -123,7 +123,6 @@ p.chat-time {
     width: 150px;
     height: 32px;
     padding: 7px 0px 7px 0px;
-    float: right;
 }
 
 .btn-wide-grey:hover,
@@ -137,6 +136,20 @@ p.chat-time {
     left: 50%;
 }
 
+.flexbox {
+    display: flex;
+}
+
+.flexbox .responsive {
+    flex: 1;
+}
+
+.flexbox .normal {
+    flex: 0;
+    margin: 0 0 0 1rem;
+    padding-left: 20px;
+}
+
 .site {
     left: 50%;
     max-width: 900px;
@@ -144,7 +157,7 @@ p.chat-time {
 }
 
 .wide-text {
-    width: 70%;
+    width: 100%;
     padding: 6px;
     float: left;
 }
