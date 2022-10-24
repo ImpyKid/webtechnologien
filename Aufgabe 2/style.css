@@ -16,15 +16,19 @@ table {
     width: 100%;
 }
 
+td {
+    width: 50%;
+}
+
 tbody tr td:first-child {
     text-align: right;
     padding-right: 10px;
 }
 
-.img{
-width: 100px;
-height: 100px;
-border-radius: 50%;
+.img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
 }
 
 hr {
@@ -32,12 +36,67 @@ hr {
 }
 
 select {
-    width: 100%;
+    width: 170px;
 }
 
-h1{
-color: black;
-font-size: 40px;
+h1 {
+    color: black;
+    font-size: 40px;
+}
+
+textarea {
+    max-width: 852px;
+    width: 852px;
+    height: 150px;
+}
+
+#chatbox {
+    display: flex;
+    flex-flow: row wrap;
+    padding: 10px;
+}
+
+#friend-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.friend-list-name {
+    height: 40px;
+    padding-left: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    color: black;
+    text-decoration: none;
+}
+
+.friend-list-name:hover {
+    background-color: lightgrey;
+}
+
+.friend-list-name div {
+    margin-left: auto;
+    margin-right: 10px;
+    background-color: blue;
+    color: white;
+    text-align: center;
+    padding: 2px;
+    min-width: 18px;
+}
+
+p.message {
+    width: 80%;
+    text-align: left;
+    margin: 8px 0px 8px 0px;
+}
+
+p.chat-time {
+    width: 20%;
+    text-align: right;
+    color: lightgrey;
+    margin: 8px 0px 8px 0px;
 }
 
 .btn-grey {
@@ -62,7 +121,15 @@ font-size: 40px;
     border: 0px;
     border-radius: 0%;
     width: 150px;
+    height: 32px;
     padding: 7px 0px 7px 0px;
+    float: right;
+}
+
+.btn-wide-grey:hover,
+.btn-blue:hover,
+.btn-grey:hover {
+    cursor: pointer;
 }
 
 .item-center {
@@ -79,68 +146,69 @@ font-size: 40px;
 .wide-text {
     width: 70%;
     padding: 6px;
+    float: left;
 }
 
 .round-border {
     border: 1px lightgrey solid;
     border-radius: 7px;
     background-color: white;
-    padding-left: 7px;
 }
 
-.good-a{
+.good-a {
     color: blue;
 }
 
-.good-a:link{
+.good-a:link {
     text-decoration: none;
- 
+
 }
 
 .good-a:visited {
     text-decoration: none;
 }
 
-.good-a:hover{
+.good-a:hover {
     text-decoration: underline;
 }
 
-.good-a:active{
+.good-a:active {
     text-decoration: underline;
 }
 
-.bad-a{
+.bad-a {
     color: red;
 }
 
-.bad-a:link{
+.bad-a:link {
     text-decoration: none;
- 
+
 }
 
 .bad-a:visited {
     text-decoration: none;
 }
 
-.bad-a:hover{
+.bad-a:hover {
     text-decoration: underline;
 }
 
-.bad-a:active{
+.bad-a:active {
     text-decoration: underline;
 }
 
-.div1{
+.div1 {
     width: 200px;
     height: 200px;
     float: left;
 }
 
-.div2{
+.div2 {
     width: 30px;
     height: 220px;
     float: left;
 }
+
 .div3 {
     float: left;
     background-color: white;
@@ -148,4 +216,4 @@ font-size: 40px;
     height: 220px;
     border: 1px solid gray;
     padding: auto;
-  }
+}
