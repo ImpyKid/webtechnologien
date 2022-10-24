@@ -197,19 +197,19 @@ p.chat-time {
     text-decoration: underline;
 }
 
-.div1 {
+.img-profile-div {
     width: 200px;
     height: 200px;
     float: left;
 }
 
-.div2 {
+.placeholder-div {
     width: 30px;
     height: 220px;
     float: left;
 }
 
-.div3 {
+.textbox-div {
     float: left;
     background-color: white;
     width: 500px;
