@@ -213,13 +213,13 @@ p.chat-time {
 .img-profile-div {
     width: 200px;
     height: 200px;
+    margin-right: 20px;
+    margin-bottom: 10px;
     float: left;
 }
 
-.placeholder-div {
-    width: 30px;
-    height: 220px;
-    float: left;
+.img-profile-div img {
+    width: 200px;
 }
 
 .textbox-div {
@@ -229,4 +229,38 @@ p.chat-time {
     height: 220px;
     border: 1px solid gray;
     padding: auto;
+}
+
+.name-friend {
+    font-weight: bold;
+}
+
+@media (max-width: 500px) {
+    .btn-blue {
+        width: 100%;
+        margin-top: 5px;
+    }
+
+    .btn-grey {
+        width: 100%;
+    }
+
+    .btn-wide-grey {
+        width: 75px;
+    }
+
+    .textbox-div {
+        width: 100%;
+    }
+
+    .img-profile-div {
+        width: 100%;
+
+    }
+
+    .img-profile-div img {
+        width: 200px;
+        display: flex;
+        margin: auto;
+    }
 }
