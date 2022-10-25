@@ -36,7 +36,7 @@ hr {
 }
 
 select {
-    width: 170px;
+    width: 150px;
 }
 
 h1 {
@@ -241,21 +241,12 @@ p.chat-time {
         margin-top: 5px;
     }
 
-    .btn-grey {
+    .btn-grey, .textbox-div, .img-profile-div {
         width: 100%;
     }
 
     .btn-wide-grey {
         width: 75px;
-    }
-
-    .textbox-div {
-        width: 100%;
-    }
-
-    .img-profile-div {
-        width: 100%;
-
     }
 
     .img-profile-div img {
