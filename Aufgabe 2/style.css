@@ -44,7 +44,7 @@ h1 {
     font-size: 40px;
 }
 
-textarea {
+#text-comment {
     max-width: 852px;
     width: 852px;
     height: 150px;
@@ -253,5 +253,9 @@ p.chat-time {
         width: 200px;
         display: flex;
         margin: auto;
+    }
+
+    #text-comment {
+        width: 100%;
     }
 }
