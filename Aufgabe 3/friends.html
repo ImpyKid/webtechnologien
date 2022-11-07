@@ -3,6 +3,14 @@
 
 <head>
     <link rel="stylesheet" type="text/css" href="style.css">
+
+    <script>
+        window.chatToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiVG9tIiwiaWF0IjoxNjY3MzcxMzIzfQ.UiI9pnyxicMV2dUIoT58PmLMGU0Kl-mtde0_rJ9JuEg";
+        window.chatCollectionId = "4be4248d-2e2c-4e51-ad72-ec5b9ce9ad1a";
+        window.chatServer = "https://online-lectures-cs.thi.de/chat";
+    </script>
+    <script src="script_m.js"></script>
+
     <title>Friends</title>
 </head>
 
@@ -35,10 +43,18 @@
             <li><a class="good-a" href="chat.html">Friend request from <span class="name-friend">Track</span></a></li>
         </ol>
         <hr>
-        <div class="flexbox">
-            <div class="responsive"><input class="wide-text" type="text" placeholder="Add Friend to list"></div>
-            <div class="normal"><a href="#"><button class="btn-wide-grey">Add</button></a></div>
-        </div>
+        <form action="friends.html" id="submitFormAddFriend" method="get">
+            <div class="flexbox">
+                <div class="responsive">
+                    <div id="add-friends">
+                        <input class="wide-text" id="input-friends" onclick="getUsers()" type="text"
+                            placeholder="Add Friend to list">
+                    </div>
+                </div>
+                <div class="normal"><a href="#"><button class="btn-wide-grey" type="submit"
+                            onclick="return checkUserExist()">Add</button></a></div>
+            </div>
+        </form>
     </div>
 </body>
 

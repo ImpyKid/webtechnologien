@@ -62,6 +62,34 @@ h1 {
     padding: 0;
 }
 
+#add-friends {
+    display: inline-block;
+    position: relative;
+    width: 100%;
+}
+
+#sug-friends {
+    list-style-type: none;
+    display: inline;
+}
+
+#sug-friends-items {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+}
+
+.sug-friends-items div {
+    padding: 10px;
+    cursor: pointer;
+    background-color: white;
+}
+
+.sug-friends-items div:hover {
+    background-color: lightgrey;
+}
+
 .friend-list-name {
     height: 40px;
     padding-left: 10px;
