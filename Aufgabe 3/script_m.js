@@ -81,3 +81,40 @@ function checkUserExist() {
 document.addEventListener("click", function (e) {
     clearSuggestList(e.target);
 });
+
+window.addEventListener("load", function (e) {
+    let chatbox = document.getElementById("chatbox");
+    if (chatbox != null) {
+        this.window.setInterval(function () {
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function () {
+                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                    let data = JSON.parse(xmlhttp.responseText);
+                    chatbox.replaceChildren(); //cleart den ganzen Chat als Vorbereitung zum Holen aller Nachrichten
+                    for (let i = 0; i < data.length; i++) {
+                        let divFlexbox = document.createElement("div");
+                        divFlexbox.setAttribute("class", "flexbox chat-item");
+
+                        chatbox.appendChild(divFlexbox);
+
+                        let message = document.createElement("p");
+                        message.setAttribute("class", "message responsive");
+                        message.innerText = `${data[i].from}: ${data[i].msg}`;
+
+                        let chatTime = document.createElement("p");
+                        let time = new Date(data[i].time);
+                        chatTime.setAttribute("class", "chat-time normal");
+                        chatTime.innerText = `${time.toLocaleTimeString()}`;
+
+                        divFlexbox.appendChild(message);
+                        divFlexbox.appendChild(chatTime);
+                    }
+                }
+            };
+
+            xmlhttp.open("GET", window.chatServer + "/" + window.chatCollectionId + "/message/Jerry", true);
+            xmlhttp.setRequestHeader('Authorization', 'Bearer ' + window.chatToken);
+            xmlhttp.send();
+        }, 1000);
+    }
+});

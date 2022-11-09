@@ -54,6 +54,8 @@ h1 {
     display: flex;
     flex-flow: row wrap;
     padding: 10px;
+    max-height: 500px;
+    overflow: scroll;
 }
 
 #friend-list {
@@ -115,16 +117,13 @@ h1 {
 }
 
 p.message {
-    width: 80%;
-    text-align: left;
     margin: 8px 0px 8px 0px;
 }
 
 p.chat-time {
-    width: 20%;
-    text-align: right;
     color: lightgrey;
     margin: 8px 0px 8px 0px;
+    vertical-align: middle;
 }
 
 .btn-grey {
@@ -166,6 +165,7 @@ p.chat-time {
 
 .flexbox {
     display: flex;
+    width: 100%;
 }
 
 .flexbox .responsive {
@@ -174,7 +174,6 @@ p.chat-time {
 
 .flexbox .normal {
     flex: 0;
-    margin: 0 0 0 1rem;
     padding-left: 20px;
 }
 
@@ -285,5 +284,9 @@ p.chat-time {
 
     #text-comment {
         width: 100%;
+    }
+
+    #chatbox {
+        max-height: 350px;
     }
 }
