@@ -43,7 +43,7 @@
             <li><a class="good-a" href="chat.html">Friend request from <span class="name-friend">Track</span></a></li>
         </ol>
         <hr>
-        <form action="friends.html" id="submitFormAddFriend" method="get">
+        <form action="friends.html" id="submitFormAddFriend" method="get" onsubmit="return checkUserExist(this)">
             <div class="flexbox">
                 <div class="responsive">
                     <div id="add-friends">
@@ -51,8 +51,11 @@
                             placeholder="Add Friend to list">
                     </div>
                 </div>
-                <div class="normal"><a href="#"><button class="btn-wide-grey" type="submit"
-                            onclick="return checkUserExist()">Add</button></a></div>
+                <div class="normal">
+                    <a href="#">
+                        <button class="btn-wide-grey" type="submit">Add</button>
+                    </a>
+                </div>
             </div>
         </form>
     </div>

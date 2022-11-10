@@ -58,9 +58,13 @@ function clearSuggestList(input) {
     }
 }
 
-function checkUserExist() {
+function checkUserExist(form) {
     var value = document.getElementById("input-friends").value;
-    var submitForm = document.getElementById("submitFormAddFriend");
+    if (isNullOrWhitespace(value)) {
+        alert("Bitte einen Wert eingeben!");
+        return false;
+    }
+    var submitForm = form;
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function () {
         if (xmlhttp.readyState == 4) {
@@ -76,6 +80,7 @@ function checkUserExist() {
     };
     xmlhttp.open("GET", window.chatServer + "/" + window.chatCollectionId + "/user/" + value);
     xmlhttp.send();
+    return false;
 }
 
 document.addEventListener("click", function (e) {
@@ -118,3 +123,8 @@ window.addEventListener("load", function (e) {
         }, 1000);
     }
 });
+
+function isNullOrWhitespace(string) {
+    if (string == null || string.trim() === '') return true;
+    return false;
+}
