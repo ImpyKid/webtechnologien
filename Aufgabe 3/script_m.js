@@ -49,6 +49,30 @@ function getUsers() {
     xmlhttp.send();
 }
 
+function sendMessage() {
+    const input = document.getElementById("input-message");
+    if (isNullOrWhitespace(input.value)) {
+        alert("Eingabefeld ist leer!");
+        return false;
+    }
+    let xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function () {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 204) {
+            document.getElementById("submitFormChat").submit();
+            return true;
+        }
+    };
+    xmlhttp.open("POST", window.chatServer + "/" + window.chatCollectionId + "/message", true);
+    xmlhttp.setRequestHeader('Content-type', 'application/json');
+    xmlhttp.setRequestHeader('Authorization', 'Bearer ' + window.chatToken);
+    let data = {
+        message: input.value,
+        to: "Jerry"
+    };
+    let jsonString = JSON.stringify(data);
+    xmlhttp.send(jsonString);
+}
+
 function clearSuggestList(input) {
     var elements = document.getElementsByClassName("sug-friends-items");
     for (var i = 0; i < elements.length; i++) {
@@ -69,11 +93,10 @@ function checkUserExist(form) {
     xmlhttp.onreadystatechange = function () {
         if (xmlhttp.readyState == 4) {
             if (xmlhttp.status == 204) {
-                console.log("Existiert");
                 submitForm.submit();
                 return true;
             } else if (xmlhttp.status == 404) {
-                console.log("Existiert nicht");
+                alert("Dieser Nutzer existiert nicht.");
                 return false;
             }
         }

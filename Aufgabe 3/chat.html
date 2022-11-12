@@ -5,11 +5,7 @@
     <link rel="stylesheet" type="text/css" href="style.css">
     <title>Chat</title>
 
-    <script>
-        window.chatToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiVG9tIiwiaWF0IjoxNjY3MzcxMzIzfQ.UiI9pnyxicMV2dUIoT58PmLMGU0Kl-mtde0_rJ9JuEg";
-        window.chatCollectionId = "4be4248d-2e2c-4e51-ad72-ec5b9ce9ad1a";
-        window.chatServer = "https://online-lectures-cs.thi.de/chat";
-    </script>
+    <script src="credentials.js"></script>
     <script src="script_m.js"></script>
 </head>
 
@@ -22,10 +18,12 @@
         <div class="round-border" id="chatbox">
         </div>
         <hr>
-        <div class="flexbox">
-            <div class="responsive"><input class="wide-text" type="text" placeholder="New Message"></div>
-            <div class="normal"><a href="#"><button class="btn-wide-grey">Send</button></a></div>
-        </div>
+        <form action="chat.html" id="submitFormChat" method="get" onsubmit="return sendMessage()">
+            <div class="flexbox">
+                <div class="responsive"><input class="wide-text" id="input-message" type="text" placeholder="New Message"></div>
+                <div class="normal"><a href="#"><button class="btn-wide-grey">Send</button></a></div>
+            </div>
+        </form>
     </div>
 </body>
 
