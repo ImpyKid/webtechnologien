@@ -1,0 +1,10 @@
+Erstellte Nutzer:
+    Nutzer 1:
+        Username: Tom
+        Passwort: 12345678
+        Stand 13.11.2022 10.27 Token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiVG9tIiwiaWF0IjoxNjY4MzMxNTUyfQ.HtJoGKesEdPCEOQ4XuD0lkCNPQEZvh-miue5N4Jrmiw
+    
+    Nutzer 2:
+        Username: Jerry
+        Passwort: 12345678
+        Stand 13.11.2022 10.28 Token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiSmVycnkiLCJpYXQiOjE2NjgzMzE1NjN9.LUktZ3dYcqW7TtJAvKUYt1S1vfXeiLadiJgBwA_X3oM
