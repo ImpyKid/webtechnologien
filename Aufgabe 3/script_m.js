@@ -71,6 +71,7 @@ function sendMessage() {
     };
     let jsonString = JSON.stringify(data);
     xmlhttp.send(jsonString);
+    return false;
 }
 
 function clearSuggestList(input) {
