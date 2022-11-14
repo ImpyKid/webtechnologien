@@ -5,6 +5,7 @@
     <link rel="stylesheet" type="text/css" href="style.css">
     <title>Register</title>
     <script src="credentials.js"></script>
+    <script src="script_p.js"></script>
 </head>
 
 <body>
@@ -15,7 +16,7 @@
             <h1>Register yourself</h1>
         </div>
 
-        <form action="friends.html">
+        <form action="friends.html" id="registerForm" name="registerForm" onsubmit="return validateRegister()" method="post">
             <fieldset>
                 <legend>Register</legend>
                 <table>
@@ -24,7 +25,7 @@
                             <label for="fname">Username</label>
                         </td>
                         <td>
-                            <input type="text" id="fname" name="fname" placeholder="Username">
+                            <input type="text" id="fname" name="fname" placeholder="Username" onclick="changeBorder(this)" required>
                         </td>
                     </tr>
                     <tr>
@@ -32,7 +33,7 @@
                             <label for="fpwd">Password</label>
                         </td>
                         <td>
-                            <input type="text" id="fpwd" name="fpwd" placeholder="Password">
+                            <input type="password" id="fpwd" name="fpwd" placeholder="Password" onclick="changeBorder(this)" required>
                         </td>
                     </tr>
                     <tr>
@@ -40,14 +41,14 @@
                             <label for="fpwd-confirm">Confirm Password</label>
                         </td>
                         <td>
-                            <input type="text" id="fpwd-confirm" name="fpwd-confirm" placeholder="Confirm Password">
+                            <input type="password" id="fpwd-confirm" name="fpwd-confirm" placeholder="Confirm Password" onclick="changeBorder(this)" required>
                         </td>
                     </tr>
                 </table>
             </fieldset>
             <div class="item-center">
                 <a href="login.html"><button type="button" class="btn-grey">Cancel</button></a>
-                <button type="submit" class="btn-blue">Create Account</button>
+                <button id="createaccount" type="submit" class="btn-blue">Create Account</button>
             </div>
         </form>
     </div>

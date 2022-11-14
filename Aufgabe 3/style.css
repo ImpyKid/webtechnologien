@@ -289,4 +289,15 @@ p.chat-time {
     #chatbox {
         max-height: 350px;
     }
+
+.border-green {
+    border: 5px green solid;
+    background-color: green;
+}
+
+.border-red {
+    border: 5px red solid;
+    background-color: red;
+}
+
 }
