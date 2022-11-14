@@ -67,7 +67,9 @@ function changeBorder(input) {
         case "fname":
             input.addEventListener("input", function () {
                 if (input.value.length < 3) {
-                    input.style.border = '2px solid red';
+                    input.classList.add("border-red");
+                    input.classList.remove("border-green");
+                    //input.style.border = '2px solid red';
                 }
                 else {
 
@@ -75,9 +77,13 @@ function changeBorder(input) {
                     xmlhttp.onreadystatechange = function () {
                         if (xmlhttp.readyState == 4) {
                             if (xmlhttp.status == 204) {
-                                input.style.border = '2px solid red';
+                                input.classList.add("border-red");
+                                input.classList.remove("border-green");
+                                //input.style.border = '2px solid red';
                             } else if (xmlhttp.status == 404) {
-                                input.style.border = '2px solid green';
+                                input.classList.add("border-green");
+                                input.classList.remove("border-red");
+                                //input.style.border = '2px solid green';
                             }
                         }
                     };
@@ -91,10 +97,14 @@ function changeBorder(input) {
         case "fpwd":
             input.addEventListener("input", function () {
                 if (input.value.length < 8) {
-                    input.style.border = '2px solid red';
+                    input.classList.add("border-red");
+                    input.classList.remove("border-green");
+                    //input.style.border = '2px solid red';
                 }
                 else {
-                    input.style.border = '2px solid green';
+                    input.classList.add("border-green");
+                    input.classList.remove("border-red");
+                    //input.style.border = '2px solid green';
                 }
             })
             break;
@@ -103,10 +113,14 @@ function changeBorder(input) {
         case "fpwd-confirm":
             input.addEventListener("input", function () {
                 if (input.value === document.getElementById("fpwd").value) {
-                    input.style.border = '2px solid green';
+                    input.classList.add("border-green");
+                    input.classList.remove("border-red");
+                    //input.style.border = '2px solid green';
                 }
                 else {
-                    input.style.border = '2px solid red';
+                    //input.style.border = '2px solid red';
+                    input.classList.add("border-red");
+                    input.classList.remove("border-green");
                 }
             })
             break;

@@ -262,6 +262,15 @@ p.chat-time {
     font-weight: bold;
 }
 
+.border-green {
+    border: 2px green solid;
+}
+
+.border-red {
+    border: 2px red solid;
+}
+
+
 @media (max-width: 500px) {
     .btn-blue {
         width: 100%;
@@ -289,15 +298,4 @@ p.chat-time {
     #chatbox {
         max-height: 350px;
     }
-
-.border-green {
-    border: 5px green solid;
-    background-color: green;
-}
-
-.border-red {
-    border: 5px red solid;
-    background-color: red;
-}
-
 }
