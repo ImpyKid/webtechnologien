@@ -139,6 +139,3 @@ function changeBorder(input) {
     }
 
 }
-
-//Der gewählte Nutzername darf noch nicht verwendet worden sein, nutzen Sie hierfür
-//aus den Dummy-Datensatz und Informationen die Server-Funktion User Exists
