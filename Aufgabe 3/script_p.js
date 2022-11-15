@@ -106,6 +106,15 @@ function changeBorder(input) {
                     input.classList.remove("border-red");
                     //input.style.border = '2px solid green';
                 }
+
+                //Check ob Passwort immernoch gelich bei oberer Änderung
+                const confirm = document.getElementById("fpwd-confirm");
+                if (input.value !== confirm.value) {
+                    confirm.classList.add("border-red");
+                    confirm.classList.remove("border-green");
+                    //input.style.border = '2px solid green';
+                }
+
             })
             break;
         //Die Passwort-Wiederholung muss dem Passwort entsprechen
