@@ -1,0 +1,44 @@
+<div class="site">
+    <h1>Friends</h1>
+    <a class="good-a" [routerLink]="['/logout']">&lt; Logout</a> | <a class="good-a" [routerLink]="['/settings']">Settings</a>
+    <hr>
+    <div class="round-border">
+        <ul id="friend-list">
+            <a [routerLink]="['/chat']" class="friend-list-name">
+                <li>Tom</li>
+                <div>300</div>
+            </a>
+            <a [routerLink]="['/chat']" class="friend-list-name">
+                <li>Marvin</li>
+                <div>1</div>
+            </a>
+            <a [routerLink]="['/chat']" class="friend-list-name">
+                <li>Tick</li>
+            </a>
+            <a [routerLink]="['/chat']" class="friend-list-name">
+                <li>Trick</li>
+            </a>
+        </ul>
+    </div>
+    <hr>
+    <h2>New Requests</h2>
+    <ol>
+        <li><a class="good-a" [routerLink]="['/chat']">Friend request from <span class="name-friend">Track</span></a></li>
+    </ol>
+    <hr>
+    <form action="friends.html" id="submitFormAddFriend" method="get" onsubmit="return checkUserExist(this)" autocomplete="off">
+        <div class="flexbox">
+            <div class="responsive">
+                <div id="add-friends">
+                    <input class="wide-text" id="input-friends" onclick="getUsers()" type="text"
+                        placeholder="Add Friend to list">
+                </div>
+            </div>
+            <div class="normal">
+                <a href="#">
+                    <button class="btn-wide-grey" type="submit">Add</button>
+                </a>
+            </div>
+        </div>
+    </form>
+</div>

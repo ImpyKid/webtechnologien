@@ -1,0 +1,43 @@
+<div class="site">
+    <div class="item-center">
+        <img class="img" src="assets/images/user.png">
+        <br>
+        <h1>Register yourself</h1>
+    </div>
+
+    <form action="friends.html" id="registerForm" name="registerForm" onsubmit="return validateRegister()" method="post">
+        <fieldset>
+            <legend>Register</legend>
+            <table>
+                <tr>
+                    <td>
+                        <label for="fname">Username</label>
+                    </td>
+                    <td>
+                        <input type="text" id="fname" name="fname" placeholder="Username" onclick="changeBorder(this)" required>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="fpwd">Password</label>
+                    </td>
+                    <td>
+                        <input type="password" id="fpwd" name="fpwd" placeholder="Password" onclick="changeBorder(this)" required>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="fpwd-confirm">Confirm Password</label>
+                    </td>
+                    <td>
+                        <input type="password" id="fpwd-confirm" name="fpwd-confirm" placeholder="Confirm Password" onclick="changeBorder(this)" required>
+                    </td>
+                </tr>
+            </table>
+        </fieldset>
+        <div class="item-center">
+            <a [routerLink]="['/login']"><button type="button" class="btn-grey">Cancel</button></a>
+            <button id="createaccount" type="submit" class="btn-blue">Create Account</button>
+        </div>
+    </form>
+</div>
