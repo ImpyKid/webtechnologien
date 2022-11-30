@@ -107,7 +107,7 @@ h1 {
     background-color: lightgrey;
 }
 
-.friend-list-name div {
+.friend-list-name .unread-message {
     margin-left: auto;
     margin-right: 10px;
     background-color: blue;
@@ -269,6 +269,10 @@ p.chat-time {
 
 .border-red {
     border: 2px red solid;
+}
+
+.text-center {
+    text-align: center;
 }
 
 

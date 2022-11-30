@@ -8,7 +8,7 @@
                     <label for="name">First Name</label>
                 </td>
                 <td>
-                    <input type="text" name="name" id="name" placeholder="Your name">
+                    <input type="text" name="name" id="name" placeholder="Your name" [(ngModel)]="profile.firstName">
                 </td>
             </tr>
             <tr>
@@ -16,7 +16,7 @@
                     <label for="surname">Last Name</label>
                 </td>
                 <td>
-                    <input type="text" name="surname" id="surname" placeholder="Your surname">
+                    <input type="text" name="surname" id="surname" placeholder="Your surname" [(ngModel)]="profile.lastName">
                 </td>
             </tr>
             <tr>
@@ -24,10 +24,10 @@
                     Coffee or Tea?
                 </td>
                 <td>
-                    <select>
-                        <option value="nothin">Neither Nor</option>
-                        <option value="coffee">Coffee</option>
-                        <option value="tea">Tea</option>
+                    <select [(ngModel)]="profile.coffeeOrTea" name="drink">
+                        <option [ngValue]="'1'" [selected]="profile.coffeeOrTea == '1'">Neither Nor</option>
+                        <option [ngValue]="'2'" [selected]="profile.coffeeOrTea == '2'">Coffee</option>
+                        <option [ngValue]="'3'" [selected]="profile.coffeeOrTea == '3'">Tea</option>
                     </select>
                 </td>
             </tr>
@@ -35,17 +35,17 @@
     </fieldset>
     <fieldset>
         <legend>Tell Something About You</legend>
-        <textarea id="text-comment" placeholder="Leave a comment here"></textarea>
+        <textarea id="text-comment" placeholder="Leave a comment here" [(ngModel)]="profile.description"></textarea>
     </fieldset>
     <fieldset>
         <legend>Prefered Chat Layout</legend>
-        <p><input type="radio" name="layout" id="one_line"><label for="one_line"> Username and message in one
+        <p><input type="radio" name="layout" id="one_line" [(ngModel)]="profile.layout" value="1"><label for="one_line"> Username and message in one
                 line</label></p>
-        <p><input type="radio" name="layout" id="sep_line"><label for="sep_line"> Username and message in separated
+        <p><input type="radio" name="layout" id="sep_line" [(ngModel)]="profile.layout" value="2"><label for="sep_line"> Username and message in separated
                 lines</label></p>
     </fieldset>
     <div class="item-center">
         <a [routerLink]="['/friends']"><button class="btn-grey">Cancel</button></a>
-        <a href="#"><button class="btn-blue">Save</button></a>
+        <a><button class="btn-blue" (click)="printData()">Save</button></a>
     </div>
 </div>
