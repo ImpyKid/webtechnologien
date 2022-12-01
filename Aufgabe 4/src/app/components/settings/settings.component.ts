@@ -20,15 +20,6 @@ export class SettingsComponent implements OnInit {
     }
 
     public ngOnInit(): void {
-        this.backendService.login("Tom", "12345678")  //Temporär, bis Login implementiert wird.
-            .subscribe((ok: boolean) => {
-                if (ok) {
-                    console.log("Login erfolgreich");
-                } else {
-                    alert("Login fehlgeschlagen!");
-                }
-        });
-
         this.backendService.loadCurrentUser()
             .subscribe((user: User | null) => {
                 if (user != null) {
@@ -51,5 +42,10 @@ export class SettingsComponent implements OnInit {
                     alert("Data transfer failed!");
                 }
             })
+    }
+
+    private isNullOrWhitespace(string: String): boolean {
+        if (string == null || string.trim() === '') return true;
+        return false;
     }
 }

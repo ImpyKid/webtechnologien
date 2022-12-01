@@ -14,7 +14,7 @@
                         <label for="fname">Username</label>
                     </td>
                     <td>
-                        <input type="text" id="fname" name="fname" placeholder="Username">
+                        <input type="text" id="fname" name="fname" placeholder="Username" [(ngModel)]="username">
                     </td>
                 </tr>
                 <tr>
@@ -22,14 +22,14 @@
                         <label for="fpwd">Password</label>
                     </td>
                     <td>
-                        <input type="text" id="fpwd" name="fpwd" placeholder="Password">
+                        <input type="text" id="fpwd" name="fpwd" placeholder="Password" [(ngModel)]="password">
                     </td>
                 </tr>
             </table>
         </fieldset>
         <div class="item-center">
             <a [routerLink]="['/register']"><button type="button" class="btn-grey">Register</button></a>
-            <button type="submit" class="btn-blue">Login</button>
+            <button (click)="sendLogin()" class="btn-blue">Login</button>
         </div>
     </form>
 </div>

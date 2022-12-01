@@ -23,15 +23,6 @@ export class FriendsComponent implements OnInit {
     }
 
     public ngOnInit(): void {
-        this.backendService.login("Tom", "12345678")  //Temporär, bis Login implementiert wird.
-            .subscribe((ok: boolean) => {
-                if (ok) {
-                    console.log("Login erfolgreich");
-                } else {
-                    alert("Login fehlgeschlagen!");
-                }
-        });
-
         this.backendService.loadCurrentUser()
             .subscribe((currentUser: User | null) => {
                 if (currentUser != null){
