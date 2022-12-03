@@ -219,6 +219,7 @@ p.chat-time {
 
 .bad-a {
     color: red;
+    cursor: pointer;
 }
 
 .bad-a:link {

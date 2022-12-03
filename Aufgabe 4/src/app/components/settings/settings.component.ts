@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Profile } from 'src/app/models/Profile';
 import { User } from 'src/app/models/User';
 import { BackendService } from 'src/app/services/backend.service';
@@ -14,23 +15,24 @@ export class SettingsComponent implements OnInit {
 
     public drink: String;
     public profile: Profile = new Profile("", "", "", "", "");
-    public currentUser: User;
+    public username: String;
 
-    public constructor(private backendService: BackendService, private contextService: ContextService) {
+    public constructor(private backendService: BackendService, private router: Router, private contextService: ContextService) {
     }
 
     public ngOnInit(): void {
         this.backendService.loadCurrentUser()
             .subscribe((user: User | null) => {
                 if (user != null) {
-                    this.profile.firstName = this.contextService.loggedInUsername;
-                    console.log(this.profile);
+                    const userJIADW = JSON.parse(JSON.stringify(user)); // User just in a dumb way
+                    
+                    const loadedProfile = new Profile(userJIADW.firstName, userJIADW.lastName, userJIADW.coffeeOrTea, userJIADW.description, userJIADW.layout);
+
+                    this.profile = loadedProfile;
                 }
             })
-    }
-
-    public printData(): void {
-        console.log(this.contextService, this.profile);
+        
+        this.username = this.contextService.loggedInUsername;
     }
 
     public sendData(): void {
@@ -38,6 +40,7 @@ export class SettingsComponent implements OnInit {
             .subscribe((ok: Boolean) => {
                 if (ok) {
                     console.log("Transfer successfull.");
+                    this.router.navigate(['/friends']);
                 } else {
                     alert("Data transfer failed!");
                 }

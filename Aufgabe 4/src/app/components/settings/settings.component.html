@@ -1,5 +1,5 @@
 <div class="site">
-    <h1>Profile Settings</h1>
+    <h1>Profile Settings from {{ username }}</h1>
     <fieldset>
         <legend>Base Data</legend>
         <table>
@@ -46,6 +46,6 @@
     </fieldset>
     <div class="item-center">
         <a [routerLink]="['/friends']"><button class="btn-grey">Cancel</button></a>
-        <a><button class="btn-blue" (click)="printData()">Save</button></a>
+        <a><button class="btn-blue" (click)="sendData()">Save</button></a>
     </div>
 </div>

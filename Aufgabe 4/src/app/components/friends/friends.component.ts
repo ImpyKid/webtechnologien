@@ -1,99 +1,163 @@
-import { Component, ComponentFactoryResolver, OnInit } from '@angular/core';
+import { Component, ComponentFactoryResolver, ElementRef, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { Friend } from 'src/app/models/Friend';
 import { User } from 'src/app/models/User';
 import { BackendService } from 'src/app/services/backend.service';
 import { ContextService } from 'src/app/services/context.service';
+import { IntervalService } from 'src/app/services/interval.service';
 
 @Component({
     selector: 'app-friends',
     templateUrl: './friends.component.html',
     styleUrls: ['./friends.component.css']
 })
-export class FriendsComponent implements OnInit {
+export class FriendsComponent implements OnInit, OnDestroy {
 
     public friends: Array<Friend> = [];
+    public friendList: Array<Friend> = [];
     public requestedFriends: Array<Friend> = [];
-    public users: Array<String>;
+    public users: Array<string>;
 
-    public currentUsername: String = "";
+    public currentUsername: string = "";
 
-    public friendInput: String = "";
+    public friendInput: string = "";
 
-    public constructor(private backendService: BackendService, private contextService: ContextService) {
+    public constructor(private backendService: BackendService, private intervalService: IntervalService, 
+        private contextService: ContextService, private router: Router) {
+    }
+
+    public ngOnDestroy(): void {
+        this.intervalService.clearIntervals();
     }
 
     public ngOnInit(): void {
+        this.contextService.currentChatUsername = "";
+
         this.backendService.loadCurrentUser()
             .subscribe((currentUser: User | null) => {
-                if (currentUser != null){
+                if (currentUser != null) {
                     this.currentUsername = currentUser.username;
                 }
             });
 
-        this.backendService.loadFriends()
-            .subscribe((list: Friend[]) => {
-                if (list.length) {
-                    this.friends = list;
-                } else {
-                    this.friends = [];
-                }
-            });
-        
-        this.friends.forEach(element => {
-            if (element.status === "requested") this.requestedFriends.push(element);
-        });
-        
+        this.intervalService.setInterval("friends", () => this.friendIntervalService());
     }
 
     public loadUsers() {
         this.backendService.listUsers()
-            .subscribe((userList: Array<String>) => {
+            .subscribe((userList: Array<string>) => {
                 if (userList.length) {
                     this.users = userList;
-
-                    const input = <HTMLInputElement>document.getElementById("input-friends");
-
-                    //input.addEventListener("input", this.displayFriendsSuggestion(input), false);
                 } else {
                     console.log("No users found.");
                 }
             });
     }
 
-    public clearSuggestList(input: any) {
-        var elements = document.getElementsByClassName("sug-friends-items");
-        for (var i = 0; i < elements.length; i++) {
-            if (input != elements[i] && input != document.getElementById("input-friends")) {
-                elements[i].parentNode?.removeChild(elements[i]);
+    public sendFriendRequest(): void {
+        let exists: Boolean = false;
+
+        if (this.friendList.some((friend) => friend.username == this.friendInput)) {
+            alert("Already in friends list");
+        } else {
+            this.users.forEach(element => {
+                if (this.friendInput == element) {
+                    exists = true;
+                }
+            });
+
+            if (exists) {
+                this.backendService.friendRequest(this.friendInput)
+                    .subscribe((ok: boolean) => {
+                        if (ok) {
+                            console.log("Friend requested")
+                        } else {
+                            console.log("");
+                        }
+                    })
+            } else {
+                alert("User doesn't exist");
             }
         }
     }
 
-    public displayFriendsSuggestion(_value: HTMLInputElement) {
-        let list: HTMLDivElement, item, value = _value.value;
-
-                        this.clearSuggestList(_value);
-
-                        list = document.createElement("div");
-                        list.setAttribute("id", "sug-friends-items");
-                        list.setAttribute("class", "sug-friends-items");
-                        _value.parentNode?.appendChild(list);
-
-                        this.users.forEach(element => {
-                            if (element.substring(0, value.length).toUpperCase() == value.toUpperCase()) {
-                                item = document.createElement("div");
-                                item.innerHTML = "<strong>" + element.substring(0, value.length) + "</strong>";
-                                item.innerHTML += element.substring(value.length);
-                                item.innerHTML += "<input type='hidden' value='" + element + "'>";
-
-                                //item.addEventListener("click", this.selectedFriendToInput(_value, item), false);
-                                list.appendChild(item);
-                            }
-                        })
+    public acceptRequest(index: number) {
+        this.backendService.acceptFriendRequest(this.requestedFriends[index].username)
+            .subscribe((ok: Boolean) => {
+                if (ok) {
+                    this.requestedFriends.splice(index, 1);
+                    this.ngOnInit();
+                } else {
+                    console.error("");
+                }
+            });
     }
 
-    public selectedFriendToInput(_value: HTMLInputElement, item: HTMLDivElement) {
-        _value.value = item.getElementsByTagName("input")[0].value;
-        this.clearSuggestList(_value);
+    public declineRequest(index: number) {
+        this.backendService.dismissFriendRequest(this.requestedFriends[index].username)
+            .subscribe((ok: Boolean) => {
+                if (ok) {
+                    this.requestedFriends.splice(index, 1);
+                    this.ngOnInit();
+                } else {
+                    console.error("");
+                }
+            });
+    }
+
+    private friendIntervalService(): void {
+        this.loadFriends();
+        this.backendService.unreadMessageCounts()
+            .subscribe((map: Map<string, number>) => {
+                if (map.size != 0) {
+                    map.forEach((counter, username) => {
+                        this.friends.forEach(friends => {
+                            if (username == friends.username) {
+                                friends.unreadMessages = counter;
+                            }
+                        });
+                    });
+                }
+            });
+    }
+
+    public loadFriends(): void {
+        this.backendService.loadFriends()
+            .subscribe((list: Array<Friend>) => {
+                if (list.length) {
+                    this.friends = list;
+                    for (let i = 0; i < this.friends.length; i++) {
+                        this.friends[i].unreadMessages = 0;
+                        if (this.friends[i].status == "requested") {
+                            if (!this.requestedFriends.some(friend => friend.username == this.friends[i].username)) {
+                                this.requestedFriends.push(this.friends[i]);
+                            }
+                        }
+                        if (this.friends[i].status == "accepted") {
+                            if (!this.friendList.some(friend => friend.username == this.friends[i].username)) {
+                                this.friendList.push(this.friends[i]);
+                            }
+                        }
+                    }
+                } else {
+                    this.friends = [];
+                }
+            });
+    }
+
+    public enterChat(index: number) {
+        this.contextService.currentChatUsername = this.friendList[index].username;
+            this.router.navigate(['/chat'])
+    }
+
+    public deleteFriend(name: string) {
+        this.backendService.removeFriend(name)
+            .subscribe((ok: Boolean) => {
+                if (ok) {
+                    this.friendList.splice(this.friendList.indexOf(this.friendList.filter((value) => value.username == name)[0]))
+                    console.log("Gelöscht");
+                }
+            });
     }
 }
+

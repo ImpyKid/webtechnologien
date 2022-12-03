@@ -1,15 +1,32 @@
 <div class="site">
-    <h1>Chat with Tom</h1>
-    <a class="good-a" [routerLink]="['/friends']">&lt; Back</a> | <a class="good-a" [routerLink]="['/profile']">Profile</a> | <a
-        class="bad-a" [routerLink]="['/friends']">Remove Friend</a>
+    <h1>Chat with {{ chattingWithUsername }}</h1>
+    <a class="good-a" [routerLink]="['/friends']">&lt; Back</a> | <a class="good-a"
+        [routerLink]="['/profile']">Profile</a> | <a class="bad-a" (click)="deleteFriend()">Remove Friend</a>
     <hr>
-    <div class="round-border" id="chatbox">
+    <div class="round-border" id="chatbox" *ngIf="messages.length != 0">
+        <ng-container *ngIf="preferedChatLayout == 1">
+            <div *ngFor="let message of messages" class="flexbox chat-item">
+                <p class="message responsive">{{ message.from }}: {{ message.msg }}</p>
+                <p class="chat-time">{{ convertToTimeString(message.time) }}</p>
+            </div>
+        </ng-container>
+        <ng-container *ngIf="preferedChatLayout == 2">
+            <div *ngFor="let message of messages" class="flexbox chat-item">
+                <div class="message responsive">
+                    <p>{{ message.from }}: </p>
+                    <span class="msg">{{ message.msg }}</span>
+                </div>
+                <p class="chat-time">{{ convertToTimeString(message.time) }}</p>
+            </div>
+        </ng-container>
+    </div>
+    <div class="round-border" *ngIf="messages.length == 0">
+        <p class="text-center">No messages. Start a conversation now! :)</p>
     </div>
     <hr>
-    <form action="chat.html" id="submitFormChat" method="get" onsubmit="return sendMessage()" autocomplete="off">
-        <div class="flexbox">
-            <div class="responsive"><input class="wide-text" id="input-message" type="text" placeholder="New Message"></div>
-            <div class="normal"><a href="#"><button class="btn-wide-grey">Send</button></a></div>
-        </div>
-    </form>
+    <div class="flexbox">
+        <div class="responsive"><input class="wide-text" id="input-message" type="text" placeholder="New Message"
+                [(ngModel)]="inputMessage" (keydown.enter)="sendMessage()" autocomplete="off"></div>
+        <div class="normal"><button class="btn-wide-grey" (click)="sendMessage()">Send</button></div>
+    </div>
 </div>

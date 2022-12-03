@@ -8,3 +8,15 @@ Erstellte Nutzer:
         Username: Jerry
         Passwort: 12345678
         Stand 13.11.2022 10.28 Token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiSmVycnkiLCJpYXQiOjE2NjgzMzE1NjN9.LUktZ3dYcqW7TtJAvKUYt1S1vfXeiLadiJgBwA_X3oM
+    
+    Nutzer 3:
+        Username: Matthias
+        Passwort: 12345678
+        Stand 03.12.2022 15.27 Token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiTWF0dGhpYXMiLCJpYXQiOjE2NzAwNzc2NzV9.Nq8mkaifYrQfKdxTPZrgYtaPJx6tDYA45ne9LfJsGKI
+
+    Nutzer 4:
+        Username: Pascal
+        Passwort: 12345678
+        Stand 03.12.2022 15.29 Token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiUGFzY2FsIiwiaWF0IjoxNjcwMDc3NzI2fQ.THr9NDxUxd1AlKY3fGbD9qkkVzqEn6z3lcy3k-LvShY
+
+

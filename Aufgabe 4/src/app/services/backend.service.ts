@@ -7,7 +7,11 @@ import { Profile } from '../models/Profile';
 import { User } from '../models/User';
 import { ContextService } from './context.service';
 
-@Injectable({
+/**
+ * Service for accessing the REST server backend.
+ * See also https://online-lectures-cs.thi.de/chat/full
+ */
+ @Injectable({
     providedIn: 'root'
 })
 export class BackendService {
@@ -19,6 +23,13 @@ export class BackendService {
     public constructor(private httpClient: HttpClient, private context: ContextService) { 
     }
 
+    /**
+     * Perform authentication on the server based on username and password.
+     * Upon successful authentication the username is stored in the context service.
+     * @param username 
+     * @param password 
+     * @returns true if authentication was successful, otherwise false
+     */
     public login(username: string, password: string): Observable<boolean> {
         const body = { "username": username, "password": password };
         const observable = new Observable<boolean>(subscriber => {
@@ -38,6 +49,12 @@ export class BackendService {
         return observable;
     }
 
+    /**
+     * Register new user for username and password
+     * @param username 
+     * @param password 
+     * @returns true if successfull
+     */
     public register(username: string, password: string): Observable<boolean> {
         const body = { "username": username, "password": password };
         const observable = new Observable<boolean>(subscriber => {
@@ -57,6 +74,10 @@ export class BackendService {
         return observable;
     }
 
+    /**
+     * Returns true if user with `username` exists.
+     * @param username 
+     */
     public userExists(username: string): Observable<boolean> {
         const observable = new Observable<boolean>(subscriber => {
             const serverCall = this.httpClient.get(this.restServerURL + 'user/' + username);
@@ -74,10 +95,17 @@ export class BackendService {
         return observable;
     }
 
+    /**
+     * Returns user object for currently logged in user.
+     */
     public loadCurrentUser(): Observable<User | null> {
         return this.loadUser(this.context.loggedInUsername);
     }
 
+    /**
+     * Returns user object for user with given username.
+     * @param username 
+     */
     public loadUser(username: string): Observable<User | null> {
         const observable = new Observable<User | null>(subscriber => {
             const serverCall = this.httpClient.get(
@@ -98,6 +126,9 @@ export class BackendService {
         return observable;
     }
 
+    /**
+     * Returns array of friends for current user
+     */
     public loadFriends(): Observable<Array<Friend>> {
         const observable = new Observable<Array<Friend>>(subscriber => {
             const serverCall = this.httpClient.get(
@@ -118,6 +149,9 @@ export class BackendService {
         return observable;
     }
 
+    /**
+     * Returns array names of registered users.
+     */
     public listUsers(): Observable<Array<string>> {
         const observable = new Observable<Array<string>>(subscriber => {
             const serverCall = this.httpClient.get(
@@ -138,6 +172,11 @@ export class BackendService {
         return observable;
     }
 
+    /**
+     * Saves given profile on server.
+     * @param profile 
+     * @returns true if successful
+     */
     public saveCurrentUserProfile(profile: Profile): Observable<boolean> {
         const observable = new Observable<boolean>(subscriber => {
             const serverCall = this.httpClient.put(this.restServerURL + 'user', profile, this.headers);
@@ -155,6 +194,11 @@ export class BackendService {
         return observable;
     }
 
+    /**
+     * Creates friend request for user `username` on server.
+     * @param username 
+     * @returns true if successful
+     */
     public friendRequest(username: string): Observable<boolean> {
         const observable = new Observable<boolean>(subscriber => {
             const serverCall = this.httpClient.post(
@@ -175,14 +219,29 @@ export class BackendService {
         return observable;
     }
 
+    /**
+     * Accept friend request for user `username`.
+     * @param username 
+     * @returns true if successful
+     */
     public acceptFriendRequest(username: string): Observable<boolean> {
         return this.acceptOrDismissFriendRequest(username, 'accepted');
     }
 
-    public dismissFriendRequest(username: string): Observable<boolean> {
+    /**
+     * Deny friend request for user `username`.
+     * @param username 
+     * @returns true if successful
+     */
+     public dismissFriendRequest(username: string): Observable<boolean> {
         return this.acceptOrDismissFriendRequest(username, 'dismissed');
     }
 
+   /**
+     * Accept or deny friend request for user `username`.
+     * @param username 
+     * @returns true if successful
+     */
     private acceptOrDismissFriendRequest(username: string, status: string): Observable<boolean> {
         const observable = new Observable<boolean>(subscriber => {
             const serverCall = this.httpClient.put(
@@ -203,6 +262,11 @@ export class BackendService {
         return observable;
     }
 
+    /**
+     * Remove user `username` from friend list.
+     * @param username 
+     * @returns true if successful
+     */
     public removeFriend(username: string): Observable<boolean> {
         const observable = new Observable<boolean>(subscriber => {
             const serverCall = this.httpClient.delete(
@@ -222,6 +286,10 @@ export class BackendService {
         return observable;
     }
 
+    /**
+     * Return map of unread message counts. 
+     * Each entry has a key which is a username and a value which is the unread message count.
+     */
     public unreadMessageCounts(): Observable<Map<string, number>> {
         const observable = new Observable<Map<string, number>>(subscriber => {
             const serverCall = this.httpClient.get(
@@ -246,6 +314,10 @@ export class BackendService {
         return observable;
     }
 
+    /**
+     * Return an array of messages between the current user and `otherUser`.
+     * @param otherUser 
+     */
     public listMessages(otherUser: string): Observable<Array<Message>> {
         const observable = new Observable<Array<Message>>(subscriber => {
             const serverCall = this.httpClient.get(
@@ -266,6 +338,12 @@ export class BackendService {
         return observable;
     }
 
+    /**
+     * Send message `msg` to user `receiverUsername`.
+     * @param receiverUsername 
+     * @param msg 
+     * @returns true if successful
+     */
     public sendMessage(receiverUsername: string, msg: string): Observable<boolean> {
         const body = { "message": msg, "to": receiverUsername };
         const observable = new Observable<boolean>(subscriber => {

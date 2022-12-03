@@ -1,0 +1,12 @@
+.btn-request{
+    background-color: #a9a9a9;
+    color: white;
+    border: 0px;
+    border-radius: 0%;
+    width: 70px;
+    height: 32px;
+    padding: 7px 0px 7px 0px;
+    margin-top: 5px;
+    margin-left: 5px;
+    cursor: pointer;
+}
