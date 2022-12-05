@@ -12,6 +12,7 @@ export class LoginComponent implements OnInit {
 
     public username: string;
     public password: string;
+    public auth: boolean;
 
     public constructor(private backendService: BackendService, private router: Router) { 
     }
@@ -25,7 +26,7 @@ export class LoginComponent implements OnInit {
                 if (ok) {
                     this.router.navigate(['/friends']);
                 } else {
-                    alert("Login fehlgeschlagen!");
+                    this.auth = true;
                 }
             })
     }

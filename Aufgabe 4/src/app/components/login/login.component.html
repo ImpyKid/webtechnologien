@@ -5,6 +5,8 @@
         <h1>Please sign in</h1>
     </div>
 
+    <ng-container *ngIf="auth"><p class="errormsg"  >Authentication failed</p></ng-container>
+
     <form action="friends.html">
         <fieldset>
             <legend>Login</legend>
@@ -14,7 +16,7 @@
                         <label for="fname">Username</label>
                     </td>
                     <td>
-                        <input type="text" id="fname" name="fname" placeholder="Username" [(ngModel)]="username">
+                        <input (keyup)="auth = false" type="text" id="fname" name="fname" placeholder="Username" [(ngModel)]="username">
                     </td>
                 </tr>
                 <tr>
@@ -22,7 +24,7 @@
                         <label for="fpwd">Password</label>
                     </td>
                     <td>
-                        <input type="text" id="fpwd" name="fpwd" placeholder="Password" [(ngModel)]="password">
+                        <input (keyup)="auth = false" type="password" id="fpwd" name="fpwd" placeholder="Password" [(ngModel)]="password">
                     </td>
                 </tr>
             </table>

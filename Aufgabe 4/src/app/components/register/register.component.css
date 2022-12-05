@@ -2,3 +2,7 @@
     color: red;
     
 }
+
+:disabled{
+    background-color: rgb(241, 233, 233);
+}
