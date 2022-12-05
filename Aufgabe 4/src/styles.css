@@ -132,7 +132,8 @@ p.chat-time {
     color: white;
     border: 0px;
     border-radius: 0%;
-    padding: 5px 10px 5px 10px;
+    padding: 10px 15px 10px 15px;
+    margin-right: 10px;
 }
 
 .btn-blue {
@@ -140,7 +141,7 @@ p.chat-time {
     color: white;
     border: 0px;
     border-radius: 0%;
-    padding: 5px 10px 5px 10px;
+    padding: 10px 15px 10px 15px;
 }
 
 .btn-wide-grey {
@@ -239,6 +240,10 @@ p.chat-time {
     text-decoration: underline;
 }
 
+.error-message {
+    color: red;
+}
+
 .img-profile-div {
     width: 200px;
     height: 200px;
@@ -257,7 +262,8 @@ p.chat-time {
     width: 500px;
     height: 220px;
     border: 1px solid gray;
-    padding: auto;
+    padding-left: 10px;
+    overflow: auto;
 }
 
 .name-friend {

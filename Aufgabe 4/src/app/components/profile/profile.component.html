@@ -1,6 +1,6 @@
 <div class="site">
-    <h1>Profile of Tom</h1>
-    <a class="good-a" [routerLink]="['/chat']">&lt; Back to Chat</a> | <a class="bad-a" [routerLink]="['/friends']">Remove
+    <h1>Profile of {{ chatPartner }}</h1>
+    <a class="good-a" [routerLink]="['/chat']">&lt; Back to Chat</a> | <a class="bad-a" (click)="deleteFriend()">Remove
         Friend</a>
     <br>
     <br>
@@ -8,9 +8,22 @@
         <img src="assets/images/profile.png" alt="">
     </div>
 
-    <div class="textbox-div">
-        <p>Yeee Yeee BOIIIIIIIIIIIIIIIIIII <br>
-            IIIIIIIIIIIIIIIIIIIIIIIIIIIIIII <br>
-            IIIIIIIIIIIIIIIIIIIIIIIIIIIIIII</p>
+    <div class="textbox-div" *ngIf="!noData">
+        <p *ngIf="chatPartnerProfile.description != ''" id="description">{{ chatPartnerProfile.description }}</p>
+        <div *ngIf="chatPartnerProfile.coffeeOrTea != ''">
+            <strong>Coffe or Tea?</strong><br>
+            <span class="values">{{ chatPartnerProfile.coffeeOrTea }}</span>
+        </div>
+        <div *ngIf="chatPartnerProfile.firstName != ''">
+            <strong>First name:</strong><br>
+            <span class="values">{{ chatPartnerProfile.firstName }}</span>
+        </div>
+        <div *ngIf="chatPartnerProfile.lastName != ''">
+            <strong>Last name:</strong><br>
+            <span class="values">{{ chatPartnerProfile.lastName }}</span>
+        </div>
+    </div>
+    <div class="textbox-div" *ngIf="noData">
+        <br>{{ chatPartner }} has no personal data stored. :(
     </div>
 </div>

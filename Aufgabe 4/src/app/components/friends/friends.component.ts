@@ -21,8 +21,10 @@ export class FriendsComponent implements OnInit, OnDestroy {
     public currentUsername: string = "";
 
     public friendInput: string = "";
+    public message: string = "";
+    public displayErrorMessage: boolean = false;
 
-    public constructor(private backendService: BackendService, private intervalService: IntervalService, 
+    public constructor(private backendService: BackendService, private intervalService: IntervalService,
         private contextService: ContextService, private router: Router) {
     }
 
@@ -39,6 +41,8 @@ export class FriendsComponent implements OnInit, OnDestroy {
                     this.currentUsername = currentUser.username;
                 }
             });
+        
+        this.loadUsers();
 
         this.intervalService.setInterval("friends", () => this.friendIntervalService());
     }
@@ -57,8 +61,10 @@ export class FriendsComponent implements OnInit, OnDestroy {
     public sendFriendRequest(): void {
         let exists: Boolean = false;
 
-        if (this.friendList.some((friend) => friend.username == this.friendInput)) {
-            alert("Already in friends list");
+        if (this.friendList.some((friend) => friend.username.toUpperCase() == this.friendInput.toUpperCase())) {
+            this.showErrorMessage("Already in friends list");
+        } else if (this.friendInput.toUpperCase() == this.contextService.loggedInUsername.toUpperCase()) {
+            this.showErrorMessage("You can't send a friend request to yourself.");
         } else {
             this.users.forEach(element => {
                 if (this.friendInput == element) {
@@ -70,13 +76,14 @@ export class FriendsComponent implements OnInit, OnDestroy {
                 this.backendService.friendRequest(this.friendInput)
                     .subscribe((ok: boolean) => {
                         if (ok) {
+                            this.friendInput = "";
                             console.log("Friend requested")
                         } else {
                             console.log("");
                         }
                     })
             } else {
-                alert("User doesn't exist");
+                this.showErrorMessage("User doesn't exist.");
             }
         }
     }
@@ -86,7 +93,6 @@ export class FriendsComponent implements OnInit, OnDestroy {
             .subscribe((ok: Boolean) => {
                 if (ok) {
                     this.requestedFriends.splice(index, 1);
-                    this.ngOnInit();
                 } else {
                     console.error("");
                 }
@@ -98,7 +104,6 @@ export class FriendsComponent implements OnInit, OnDestroy {
             .subscribe((ok: Boolean) => {
                 if (ok) {
                     this.requestedFriends.splice(index, 1);
-                    this.ngOnInit();
                 } else {
                     console.error("");
                 }
@@ -111,7 +116,7 @@ export class FriendsComponent implements OnInit, OnDestroy {
             .subscribe((map: Map<string, number>) => {
                 if (map.size != 0) {
                     map.forEach((counter, username) => {
-                        this.friends.forEach(friends => {
+                        this.friendList.forEach(friends => {
                             if (username == friends.username) {
                                 friends.unreadMessages = counter;
                             }
@@ -147,17 +152,23 @@ export class FriendsComponent implements OnInit, OnDestroy {
 
     public enterChat(index: number) {
         this.contextService.currentChatUsername = this.friendList[index].username;
-            this.router.navigate(['/chat'])
+        this.router.navigate(['/chat']);
     }
 
-    public deleteFriend(name: string) {
-        this.backendService.removeFriend(name)
-            .subscribe((ok: Boolean) => {
-                if (ok) {
-                    this.friendList.splice(this.friendList.indexOf(this.friendList.filter((value) => value.username == name)[0]))
-                    console.log("Gelöscht");
-                }
-            });
+    private showErrorMessage(message: string) {
+        this.message = message;
+        this.displayErrorMessage = true;
+
+        setTimeout(() => {
+            this.displayErrorMessage = false;
+            this.message = "";
+        }, 5000);
+    }
+
+    public filterUsers(): Array<string> {
+        if (this.users.length != 0 && this.users != (undefined || null)) return this.users.filter(user => 
+            user.substring(0, this.friendInput.length).toUpperCase() == this.friendInput.toUpperCase());
+        else return [];
     }
 }
 

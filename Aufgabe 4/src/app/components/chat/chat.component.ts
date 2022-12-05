@@ -24,6 +24,8 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
     public messages: Array<Message> = [];
 
     public inputMessage: string;
+    public message: string;
+    public displayErrorMessage: boolean;
 
     public constructor(private contextService: ContextService, private backendService: BackendService, 
         private intervalService: IntervalService, private router: Router) { 
@@ -58,9 +60,14 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
             .subscribe((user: User | null) => {
                 if(user != null) {
                     this.preferedChatLayout = JSON.parse(JSON.stringify(user)).layout;
+
+                    if (this.preferedChatLayout === undefined) {
+                        this.preferedChatLayout = 1; 
+                            //Setzt Standard-Layout auf einzeilig, falls Nutzer noch nicht ausgewählt hat.
+                    }
                 }
             });
-
+        
         this.intervalService.setInterval("chat", () => this.getMessages());
     }
 
@@ -72,6 +79,9 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
     }
 
     public sendMessage(): void {
+        if (this.isNullOrWhitespace(this.inputMessage)) {
+            this.showErrorMessage("Empty messages are not allowed. Please input something.");
+        } else {
         this.backendService.sendMessage(this.chattingWithUsername, this.inputMessage)
             .subscribe((ok: Boolean) => {
                 if (ok) {
@@ -79,7 +89,8 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
                     this.getMessages();
                     this.scrollToBottom();
                 }
-            })
+            });
+        }
     }
 
     public deleteFriend(): void {
@@ -96,5 +107,20 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
     public convertToTimeString(time: number): string {
         let momentTime = moment(time);
         return momentTime.format("D.M.YYYY HH:mm:ss");
+    }
+
+    private showErrorMessage(message: string) {
+        this.message = message;
+        this.displayErrorMessage = true;
+
+        setTimeout(() => {
+            this.displayErrorMessage = false;
+            this.message = "";
+        }, 5000);
+    }
+
+    private isNullOrWhitespace(string: string): boolean {
+        if (string == null || string.trim() === '') return true;
+        return false;
     }
 }

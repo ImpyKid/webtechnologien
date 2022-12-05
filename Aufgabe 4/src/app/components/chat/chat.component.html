@@ -24,6 +24,7 @@
         <p class="text-center">No messages. Start a conversation now! :)</p>
     </div>
     <hr>
+    <span class="error-message" *ngIf="displayErrorMessage">{{ message }}</span>
     <div class="flexbox">
         <div class="responsive"><input class="wide-text" id="input-message" type="text" placeholder="New Message"
                 [(ngModel)]="inputMessage" (keydown.enter)="sendMessage()" autocomplete="off"></div>
