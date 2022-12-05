@@ -17,6 +17,9 @@ export class SettingsComponent implements OnInit {
     public profile: Profile = new Profile("", "", "", "", "");
     public username: String;
 
+    public message: string = "";
+    public displayErrorMessage: boolean = false;
+
     public constructor(private backendService: BackendService, private router: Router, private contextService: ContextService) {
     }
 
@@ -39,16 +42,20 @@ export class SettingsComponent implements OnInit {
         this.backendService.saveCurrentUserProfile(this.profile)
             .subscribe((ok: Boolean) => {
                 if (ok) {
-                    console.log("Transfer successfull.");
                     this.router.navigate(['/friends']);
                 } else {
-                    alert("Data transfer failed!");
+                    this.showErrorMessage("Data transfer failed!");
                 }
             })
     }
 
-    private isNullOrWhitespace(string: String): boolean {
-        if (string == null || string.trim() === '') return true;
-        return false;
+    private showErrorMessage(message: string) {
+        this.message = message;
+        this.displayErrorMessage = true;
+
+        setTimeout(() => {
+            this.displayErrorMessage = false;
+            this.message = "";
+        }, 5000);
     }
 }

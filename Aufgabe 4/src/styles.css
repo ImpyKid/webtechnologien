@@ -257,7 +257,8 @@ p.chat-time {
     width: 500px;
     height: 220px;
     border: 1px solid gray;
-    padding: auto;
+    padding-left: 10px;
+    overflow: auto;
 }
 
 .name-friend {

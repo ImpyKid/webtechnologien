@@ -58,9 +58,14 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
             .subscribe((user: User | null) => {
                 if(user != null) {
                     this.preferedChatLayout = JSON.parse(JSON.stringify(user)).layout;
+
+                    if (this.preferedChatLayout === undefined) {
+                        this.preferedChatLayout = 1; 
+                            //Setzt Standard-Layout auf einzeilig, falls Nutzer noch nicht ausgewählt hat.
+                    }
                 }
             });
-
+        
         this.intervalService.setInterval("chat", () => this.getMessages());
     }
 
