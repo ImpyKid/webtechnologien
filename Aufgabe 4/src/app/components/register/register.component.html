@@ -5,7 +5,7 @@
         <h1>Register yourself</h1>
     </div>
 
-    <form action="friends.html" id="registerForm" name="registerForm" onsubmit="return validateRegister()" method="post">
+    <form [formGroup]="registerForm" action="friends.html" id="registerForm" name="registerForm"  method="post">
         <fieldset>
             <legend>Register</legend>
             <table>
@@ -14,30 +14,40 @@
                         <label for="fname">Username</label>
                     </td>
                     <td>
-                        <input type="text" id="fname" name="fname" placeholder="Username" onclick="changeBorder(this)" required>
+                        <input (keyup)="usercheck()" formControlName="username" type="text" id="fname" name="fname" placeholder="Username" [(ngModel)]="username" >
                     </td>
+                </tr>
+                <tr>
+                  <td></td><ng-container *ngIf="userexist"><label class="errormsg">Username already used</label></ng-container>
+                  <ng-container *ngIf="registerForm.controls['username'].errors?.['minlength']"><label class="errormsg">Username too short (min. 3 characters) </label></ng-container>
                 </tr>
                 <tr>
                     <td>
                         <label for="fpwd">Password</label>
                     </td>
                     <td>
-                        <input type="password" id="fpwd" name="fpwd" placeholder="Password" onclick="changeBorder(this)" required>
+                        <input formControlName="password" type="password" id="fpwd" name="fpwd" placeholder="Password" [(ngModel)]="password" >
                     </td>
+                </tr>
+                <tr>
+                    <td></td><ng-container *ngIf="registerForm.controls['password'].errors?.['minlength']"><label class="errormsg">Password too short (min. 8 characters)</label></ng-container>
                 </tr>
                 <tr>
                     <td>
                         <label for="fpwd-confirm">Confirm Password</label>
                     </td>
                     <td>
-                        <input type="password" id="fpwd-confirm" name="fpwd-confirm" placeholder="Confirm Password" onclick="changeBorder(this)" required>
+                        <input (keyup)="!checkpwd()" formControlName="confirmpwd" type="password" id="fpwd-confirm" name="fpwd-confirm" placeholder="Confirm Password"  [(ngModel)]="confirmPassword" >
                     </td>
                 </tr>
+                <tr>
+                    <td></td><ng-container *ngIf="!checkpwd() && !registerForm.controls['password'].errors?.['required']"><label class="errormsg">Passwords do not match</label></ng-container>
+                  </tr>
             </table>
         </fieldset>
         <div class="item-center">
             <a [routerLink]="['/login']"><button type="button" class="btn-grey">Cancel</button></a>
-            <button id="createaccount" type="submit" class="btn-blue">Create Account</button>
+            <button (click)="createuser()" [disabled]="!registerForm.valid || !checkpwd() || userexist" id="createaccount" type="submit" class="btn-blue">Create Account</button>
         </div>
     </form>
 </div>

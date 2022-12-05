@@ -14,6 +14,9 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ContextService } from './services/context.service';
 import { IntervalService } from './services/interval.service';
+import { ReactiveFormsModule } from '@angular/forms';
+
+
 
 @NgModule({
   declarations: [
@@ -30,7 +33,9 @@ import { IntervalService } from './services/interval.service';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule,
+
   ],
   providers: [ ContextService, IntervalService ],
   bootstrap: [AppComponent]
