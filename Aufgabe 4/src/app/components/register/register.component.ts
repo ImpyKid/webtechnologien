@@ -32,7 +32,6 @@ export class RegisterComponent implements OnInit {
     })
 
 
-
     public constructor(private backendService: BackendService, private router: Router ) { 
     }
 
