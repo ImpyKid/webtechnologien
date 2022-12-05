@@ -9,9 +9,7 @@
     </div>
 
     <div class="textbox-div" *ngIf="!noData">
-        <p *ngIf="chatPartnerProfile.description != ''">
-            {{ chatPartnerProfile.description }}
-        </p>
+        <p *ngIf="chatPartnerProfile.description != ''" id="description">{{ chatPartnerProfile.description }}</p>
         <div *ngIf="chatPartnerProfile.coffeeOrTea != ''">
             <strong>Coffe or Tea?</strong><br>
             <span class="values">{{ chatPartnerProfile.coffeeOrTea }}</span>

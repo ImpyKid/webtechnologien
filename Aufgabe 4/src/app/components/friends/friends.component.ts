@@ -76,6 +76,7 @@ export class FriendsComponent implements OnInit, OnDestroy {
                 this.backendService.friendRequest(this.friendInput)
                     .subscribe((ok: boolean) => {
                         if (ok) {
+                            this.friendInput = "";
                             console.log("Friend requested")
                         } else {
                             console.log("");
