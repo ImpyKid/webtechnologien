@@ -6,9 +6,9 @@ class User implements JsonSerializable
 {
     private string $username;
 
-    function __construct()
+    function __construct($username = "null")
     {
-        $this->username = null;
+        $this->username = $username;
     }
 
     public function getUsername() {

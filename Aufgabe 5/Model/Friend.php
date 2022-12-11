@@ -9,10 +9,9 @@ class Friend implements JsonSerializable
     private string $username;
     private string $status;
 
-    public function __construct(string $username = null)
+    public function __construct(string $username = "null")
     {
         $this->username = $username;
-        //$this->status = $status;
     }
 
     public function getUsername()
