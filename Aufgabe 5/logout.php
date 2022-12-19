@@ -1,3 +1,8 @@
+<?php
+    require("start.php");
+    session_unset();
+?>
+
 <!DOCTYPE html>
 <html>
 

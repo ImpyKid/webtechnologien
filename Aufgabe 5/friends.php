@@ -1,3 +1,24 @@
+<?php
+use Model\Friend;
+
+require("start.php");
+if (!isset($_SESSION['user'])) {
+    session_unset();
+    header("Location: login.php");
+}
+
+$request = $service->loadFriends();
+$acceptedFriends = [];
+$requestedFriends = [];
+
+if (sizeof($request) != 0) {
+    foreach ($request as $friend) {
+        if ($friend->getStatus() === "accepted") array_push($acceptedFriends, $friend);
+        else if ($friend->getStatus() === "requested") array_push($requestedFriends, $friend);
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -16,30 +37,28 @@
         <a class="good-a" href="logout.php">&lt; Logout</a> | <a class="good-a" href="settings.php">Settings</a>
         <hr>
         <div class="round-border">
+            <?php echo count($acceptedFriends) == 0 ? "No friends :(" : "" ?>
             <ul id="friend-list">
-                <a href="chat.html" class="friend-list-name">
-                    <li>Tom</li>
+                <?php foreach ($acceptedFriends as $friend) { ?>
+                <a href="chat.php?username=<?= $friend->getUsername() ?>" class="friend-list-name">
+                    <li><?= $friend->getUsername() ?></li>
                     <div>300</div>
                 </a>
-                <a href="chat.html" class="friend-list-name">
-                    <li>Marvin</li>
-                    <div>1</div>
-                </a>
-                <a href="chat.html" class="friend-list-name">
-                    <li>Tick</li>
-                </a>
-                <a href="chat.html" class="friend-list-name">
-                    <li>Trick</li>
-                </a>
+                <?php } ?>
             </ul>
         </div>
         <hr>
         <h2>New Requests</h2>
         <ol>
-            <li><a class="good-a" href="chat.html">Friend request from <span class="name-friend">Track</span></a></li>
+            <?php foreach ($requestedFriends as $friend) { ?>
+            <li>
+                <a class="good-a">Friend request from <span class="name-friend"><?= $friend->getUsername() ?>></span></a>
+                <button name="accept">Accept</button> <button name="decline">Decline</button>
+            </li>
+            <?php } ?>
         </ol>
         <hr>
-        <form action="friends.html" id="submitFormAddFriend" method="get" onsubmit="return checkUserExist(this)" autocomplete="off">
+        <form action="friends.php" id="submitFormAddFriend" method="post" onsubmit="return checkUserExist(this)" autocomplete="off">
             <div class="flexbox">
                 <div class="responsive">
                     <div id="add-friends">
@@ -49,7 +68,7 @@
                 </div>
                 <div class="normal">
                     <a href="#">
-                        <button class="btn-wide-grey" type="submit">Add</button>
+                        <button class="btn-wide-grey" type="submit" value="add-friend">Add</button>
                     </a>
                 </div>
             </div>

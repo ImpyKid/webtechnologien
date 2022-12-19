@@ -1,3 +1,23 @@
+<?php
+require("start.php");
+if (isset($_SESSION['user'])) {
+    header("Location: friends.php");
+    exit();
+}
+
+if($_SERVER["REQUEST_METHOD"] == "POST") {
+    $username = $_POST['fname'];
+    $password = $_POST['fpwd'];
+    $success = $service->login($username, $password);
+    if($success) {
+        $_SESSION['user'] = $username;
+
+        header("Location: friends.php");
+        exit();
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -15,7 +35,7 @@
             <h1>Please sign in</h1>
         </div>
 
-        <form action="friends.php">
+        <form method="post">
             <fieldset>
                 <legend>Login</legend>
                 <table>

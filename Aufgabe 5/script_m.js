@@ -23,7 +23,7 @@ function getUsers() {
                     this.parentNode.appendChild(list); //Fügt das DIV dem DIV über Input hinzu.
 
                     data.forEach(element => {
-                        if (element.substr(0, value.length).toUpperCase() == value.toUpperCase()) {
+                        if (!isNullOrWhitespace(input.value) && element.substr(0, value.length).toUpperCase() == value.toUpperCase()) {
                             item = document.createElement("div");
                             item.innerHTML = "<strong>" + element.substr(0, value.length) + "</strong>";
                             item.innerHTML += element.substr(value.length);
@@ -149,6 +149,6 @@ window.addEventListener("load", function (e) {
 });
 
 function isNullOrWhitespace(string) {
-    if (string == null || string.trim() === '') return true;
+    if (string == null || string === '') return true;
     return false;
 }
