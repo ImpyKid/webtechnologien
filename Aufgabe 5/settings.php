@@ -1,3 +1,25 @@
+<?php
+require("start.php");
+if (!isset($_SESSION['user'])) {
+    session_unset();
+    header("Location: login.php");
+}
+
+$loadUser = $service->loadUser($_SESSION['user']);
+
+if ($_SERVER['REQUEST_METHOD'] == "POST") {
+    $saveUser = new \Model\User($_SESSION['user']);
+    $saveUser->setFirstName($_POST['name']);
+    $saveUser->setLastName($_POST['surname']);
+    $saveUser->setCoffeeOrTea((int)$_POST['coffeeOrTea']);
+    $saveUser->setDescription($_POST['description']);
+    $saveUser->setLayout((int)$_POST['layout']);
+
+    $service->saveUser($saveUser);
+}
+
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -7,7 +29,8 @@
 </head>
 
 <body>
-    <div class="site">
+<div class="site">
+    <form method="post">
         <h1>Profile Settings</h1>
         <fieldset>
             <legend>Base Data</legend>
@@ -17,7 +40,8 @@
                         <label for="name">First Name</label>
                     </td>
                     <td>
-                        <input type="text" name="name" id="name" placeholder="Your name">
+                        <input type="text" name="name" id="name" placeholder="Your name"
+                               value="<?= $loadUser->getFirstName() ?>">
                     </td>
                 </tr>
                 <tr>
@@ -25,7 +49,8 @@
                         <label for="surname">Last Name</label>
                     </td>
                     <td>
-                        <input type="text" name="surname" id="surname" placeholder="Your surname">
+                        <input type="text" name="surname" id="surname" placeholder="Your surname"
+                               value="<?= $loadUser->getLastName() ?>">
                     </td>
                 </tr>
                 <tr>
@@ -33,10 +58,16 @@
                         Coffee or Tea?
                     </td>
                     <td>
-                        <select>
-                            <option value="nothin">Neither Nor</option>
-                            <option value="coffee">Coffee</option>
-                            <option value="tea">Tea</option>
+                        <select name="coffeeOrTea">
+                            <option value="1" <?= $loadUser->getCoffeeOrTea() == 1 ? ' selected="selected"' : '' ?>>
+                                Neither Nor
+                            </option>
+                            <option value="2" <?= $loadUser->getCoffeeOrTea() == 2 ? ' selected="selected"' : '' ?>>
+                                Coffee
+                            </option>
+                            <option value="3" <?= $loadUser->getCoffeeOrTea() == 3 ? ' selected="selected"' : '' ?>>
+                                Tea
+                            </option>
                         </select>
                     </td>
                 </tr>
@@ -44,20 +75,27 @@
         </fieldset>
         <fieldset>
             <legend>Tell Something About You</legend>
-            <textarea id="text-comment" placeholder="Leave a comment here"></textarea>
+            <textarea id="text-comment" name="description" placeholder="Leave a comment here"><?= $loadUser->getDescription() ?></textarea>
         </fieldset>
         <fieldset>
-            <legend>Prefered Chat Layout</legend>
-            <p><input type="radio" name="layout" id="one_line"><label for="one_line"> Username and message in one
-                    line</label></p>
-            <p><input type="radio" name="layout" id="sep_line"><label for="sep_line"> Username and message in separated
-                    lines</label></p>
+            <legend>Preferred Chat Layout</legend>
+            <p>
+                <input type="radio" name="layout" id="one_line" <?= $loadUser->getLayout() == 1 ? 'checked' : '' ?> value="1">
+                <label for="one_line"> Username and message in one line</label>
+            </p>
+            <p>
+                <input type="radio" name="layout" id="sep_line" <?= $loadUser->getLayout() == 2 ? 'checked' : '' ?> value="2">
+                <label for="sep_line"> Username and message in separated lines</label>
+            </p>
         </fieldset>
         <div class="item-center">
-            <a href="friends.php"><button class="btn-grey">Cancel</button></a>
-            <a href="#"><button class="btn-blue">Save</button></a>
+            <a href="friends.php">
+                <button class="btn-grey" type="button">Cancel</button>
+            </a>
+            <button class="btn-blue" type="submit">Save</button>
         </div>
-    </div>
+    </FORM>
+</div>
 </body>
 
 </html>

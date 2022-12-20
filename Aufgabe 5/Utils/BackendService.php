@@ -54,7 +54,9 @@ class BackendService {
     public function saveUser(User $user): bool {
         try {
            $result = HttpClient::post($this->url . "/user/" . $user->getUsername(),
-                array("firstName" => "", "lastName" => "", "coffeeOrTea" => "", "description" => "", "layout" => ""),
+                array("firstName" => $user->getFirstName(), "lastName" => $user->getLastName(),
+                    "coffeeOrTea" => $user->getCoffeeOrTea(), "description" => $user->getDescription(),
+                    "layout" => $user->getLayout()),
                 $_SESSION['token']);
            return true;
         } catch (\Exception $e) {
@@ -132,7 +134,6 @@ class BackendService {
     public function getUnread(): Array | null {
         try {
             $result = HttpClient::get($this->url . "/unread", $_SESSION['token']);
-            var_dump($result);
             return array();
         } catch (\Exception $e){
             echo "Error while fetching unread messages: " . $e . "<br>";
