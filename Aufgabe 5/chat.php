@@ -28,16 +28,16 @@ $chatpartner = $_GET['username'];
 
 <body>
     <div class="site">
-        <h1>Chat with Tom</h1>
-        <a class="good-a" href="friends.php">&lt; Back</a> | <a class="good-a" href="profile.php">Profile</a> | <a
+        <h1>Chat with <?= $chatpartner ?></h1>
+        <a class="good-a" href="friends.php">&lt; Back</a> | <a class="good-a" href="profile.php?username=<?= $chatpartner ?>">Profile</a> | <a
             class="bad-a" href="friends.php">Remove Friend</a>
         <hr>
         <div class="round-border" id="chatbox">
         </div>
         <hr>
         <div class="flexbox">
-            <div class="responsive"><input class="wide-text" id="input-message" type="text" placeholder="New Message" onkeyup="sendMessage(event)"></div>
-            <div class="normal"><button type="button" onclick="sendMessage()" class="btn-wide-grey">Send</button></div>
+            <div class="responsive"><input class="wide-text" id="input-message" type="text" placeholder="New Message" autocomplete="off" onkeyup="sendMessage(event)"></div>
+            <div class="normal"><button type="button" onclick="sendMessage(event)" class="btn-wide-grey">Send</button></div>
         </div>
     </div>
 </body>

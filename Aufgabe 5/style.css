@@ -82,6 +82,13 @@ h1 {
     right: 0;
 }
 
+#description {
+    padding-left: 10px;
+    white-space: pre-wrap;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+}
+
 .sug-friends-items div {
     padding: 10px;
     cursor: pointer;
@@ -269,7 +276,8 @@ p.chat-time {
     width: 500px;
     height: 220px;
     border: 1px solid gray;
-    padding: auto;
+    padding-left: 10px;
+    overflow: auto;
 }
 
 .name-friend {
@@ -282,6 +290,12 @@ p.chat-time {
 
 .border-red {
     border: 2px red solid;
+}
+
+.values {
+    padding-left: 40px;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
 }
 
 
