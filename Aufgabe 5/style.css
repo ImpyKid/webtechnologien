@@ -152,10 +152,24 @@ p.chat-time {
     padding: 7px 0px 7px 0px;
 }
 
+.btn-request{
+    background-color: #a9a9a9;
+    color: white;
+    border: 0px;
+    border-radius: 0%;
+    width: 70px;
+    height: 32px;
+    padding: 7px 0px 7px 0px;
+    margin-top: 5px;
+    margin-left: 5px;
+}
+
 .btn-wide-grey:hover,
 .btn-blue:hover,
-.btn-grey:hover {
+.btn-grey:hover,
+.btn-request:hover{
     cursor: pointer;
+    background-color: #cfcfcf;
 }
 
 .item-center {

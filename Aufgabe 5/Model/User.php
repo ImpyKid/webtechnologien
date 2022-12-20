@@ -10,7 +10,7 @@ class User implements JsonSerializable
     private string $lastName = '';
     private int $coffeeOrTea = 0;
     private string $description  = '';
-    private int $layout = 0;
+    private int $layout = 1;
 
     function __construct($username = "null")
     {

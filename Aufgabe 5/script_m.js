@@ -49,7 +49,8 @@ function getUsers() {
     xmlhttp.send();
 }
 
-function sendMessage() {
+function sendMessage(event) {
+    if (event.keyCode != 13) return false;
     const input = document.getElementById("input-message");
     if (isNullOrWhitespace(input.value)) {
         alert("Eingabefeld ist leer!");
@@ -67,10 +68,11 @@ function sendMessage() {
     xmlhttp.setRequestHeader('Authorization', 'Bearer ' + window.chatToken);
     let data = {
         message: input.value,
-        to: "Jerry"
+        to: window.chatPartner
     };
     let jsonString = JSON.stringify(data);
     xmlhttp.send(jsonString);
+    input.value = "";
     return false;
 }
 
@@ -141,7 +143,7 @@ window.addEventListener("load", function (e) {
                 }
             };
 
-            xmlhttp.open("GET", window.chatServer + "/" + window.chatCollectionId + "/message/Jerry", true);
+            xmlhttp.open("GET", window.chatServer + "/" + window.chatCollectionId + "/message/" + window.chatPartner, true);
             xmlhttp.setRequestHeader('Authorization', 'Bearer ' + window.chatToken);
             xmlhttp.send();
         }, 1000);

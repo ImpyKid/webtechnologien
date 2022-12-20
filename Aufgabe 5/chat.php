@@ -1,3 +1,16 @@
+<?php
+require("start.php");
+
+if (empty($_GET['username'])) header('Location: friends.php');
+if (!isset($_SESSION['user'])) {
+    session_unset();
+    header("Location: login.php");
+}
+
+$chatpartner = $_GET['username'];
+
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -7,6 +20,10 @@
 
     <script src="credentials.js"></script>
     <script src="script_m.js"></script>
+    <script>
+        window.chatPartner = "<?= $chatpartner ?>";
+        window.chatToken = "<?= $_SESSION['chat_token'] ?>"
+    </script>
 </head>
 
 <body>
@@ -18,12 +35,10 @@
         <div class="round-border" id="chatbox">
         </div>
         <hr>
-        <form action="chat.php" id="submitFormChat" method="get" autocomplete="off">
-            <div class="flexbox">
-                <div class="responsive"><input class="wide-text" id="input-message" type="text" placeholder="New Message"></div>
-                <div class="normal"><a href="#"><button type="button" onclick="sendMessage()" class="btn-wide-grey">Send</button></a></div>
-            </div>
-        </form>
+        <div class="flexbox">
+            <div class="responsive"><input class="wide-text" id="input-message" type="text" placeholder="New Message" onkeyup="sendMessage(event)"></div>
+            <div class="normal"><button type="button" onclick="sendMessage()" class="btn-wide-grey">Send</button></div>
+        </div>
     </div>
 </body>
 

@@ -27,6 +27,9 @@ if (sizeof($request) != 0) {
 
     <script src="credentials.js"></script>
     <script src="script_m.js"></script>
+    <script>
+        window.chatToken = "<?= $_SESSION['chat_token'] ?>";
+    </script>
 
     <title>Friends</title>
 </head>
@@ -52,8 +55,8 @@ if (sizeof($request) != 0) {
         <ol>
             <?php foreach ($requestedFriends as $friend) { ?>
             <li>
-                <a class="good-a">Friend request from <span class="name-friend"><?= $friend->getUsername() ?>></span></a>
-                <button name="accept">Accept</button> <button name="decline">Decline</button>
+                <a class="good-a">Friend request from <span class="name-friend"><?= $friend->getUsername() ?></span></a>
+                <button name="accept" class="btn-request">Accept</button> <button name="decline" class="btn-request">Decline</button>
             </li>
             <?php } ?>
         </ol>

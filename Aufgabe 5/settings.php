@@ -16,6 +16,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $saveUser->setLayout((int)$_POST['layout']);
 
     $service->saveUser($saveUser);
+
+    $loadUser = $service->loadUser($_SESSION['user']);
 }
 
 ?>
@@ -30,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
 <body>
 <div class="site">
-    <form method="post">
+    <form method="post" action="settings.php">
         <h1>Profile Settings</h1>
         <fieldset>
             <legend>Base Data</legend>
@@ -89,12 +91,10 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             </p>
         </fieldset>
         <div class="item-center">
-            <a href="friends.php">
-                <button class="btn-grey" type="button">Cancel</button>
-            </a>
+            <button class="btn-grey" type="button" onclick="location.href='friends.php'">Cancel</button>
             <button class="btn-blue" type="submit">Save</button>
         </div>
-    </FORM>
+    </form>
 </div>
 </body>
 
