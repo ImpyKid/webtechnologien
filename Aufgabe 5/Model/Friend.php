@@ -8,6 +8,7 @@ class Friend implements JsonSerializable
 
     private string $username;
     private string $status;
+    private ?int $unread = 0;
 
     public function __construct(string $username = "null")
     {
@@ -48,5 +49,21 @@ class Friend implements JsonSerializable
         }
 
         return $friend;
+    }
+
+    /**
+     * @return int
+     */
+    public function getUnread(): int
+    {
+        return $this->unread;
+    }
+
+    /**
+     * @param int $unread
+     */
+    public function setUnread(int $unread): void
+    {
+        $this->unread = $unread;
     }
 }

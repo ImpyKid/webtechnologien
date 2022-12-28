@@ -18,13 +18,24 @@ $loadUser = $service->loadUser($chatpartner);
 <head>
     <link rel="stylesheet" type="text/css" href="style.css">
     <title>Profile</title>
+
+    <script>
+        function deleteFriend() {
+            if (confirm('Are you sure to delete ' + '<?= $chatpartner ?>' + '?'))
+                document.getElementById("deleteFriend").submit();
+        }
+    </script>
 </head>
 
 <body>
     <div class="site">
         <h1>Profile of Tom</h1>
-        <a class="good-a" href="chat.php?username=<?= $chatpartner ?>">&lt; Back to Chat</a> | <a class="bad-a" href="friends.php">Remove
-            Friend</a>
+        <a class="good-a" href="chat.php?username=<?= $chatpartner ?>">&lt; Back to Chat</a> |
+        <form method="post" action="friends.php" style="display: inline; cursor: pointer" id="deleteFriend">
+            <a class="bad-a" type="submit" onclick="deleteFriend()">Remove Friend</a>
+            <input type="hidden" name="remove" value="<?= $chatpartner ?>">
+            <input type="submit" style="display: none">
+        </form>
         <br>
         <br>
         <div class="img-profile-div">

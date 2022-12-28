@@ -82,7 +82,7 @@ class BackendService {
 
     public function friendRequest(Friend $friend): bool {
         try {
-            HttpClient::post($this->url . "/friend", $friend->getUsername(), $_SESSION['chat_token']);
+            HttpClient::post($this->url . "/friend", $friend, $_SESSION['chat_token']);
             return true;
         } catch (\Exception $e) {
             echo "Error while requesting " . $friend->getUsername() . ": " . $e . "<br>";
@@ -104,7 +104,7 @@ class BackendService {
     public function friendDismiss(Friend $friend): bool {
         try {
             HttpClient::put($this->url . "/friend/" . $friend->getUsername(),
-                array("status" => "accepted"), $_SESSION['chat_token']);
+                array("status" => "dismissed"), $_SESSION['chat_token']);
             return true;
         } catch (\Exception $e) {
             echo "Error while dismissing request from " . $friend->getUsername() . ": " . $e . "<br>";
@@ -131,10 +131,9 @@ class BackendService {
         }
     }
 
-    public function getUnread(): Array | null {
+    public function getUnread(): mixed {
         try {
-            $result = HttpClient::get($this->url . "/unread", $_SESSION['chat_token']);
-            return array();
+            return HttpClient::get($this->url . "/unread", $_SESSION['chat_token']);
         } catch (\Exception $e){
             echo "Error while fetching unread messages: " . $e . "<br>";
             return null;

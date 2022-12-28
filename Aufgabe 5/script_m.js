@@ -49,8 +49,11 @@ function getUsers() {
     xmlhttp.send();
 }
 
-function sendMessage(event) {
-    if (event.keyCode != 13) return false;
+function sendMessageWithEnterKey(event) {
+    if (event.keyCode == 13) sendMessage();
+}
+
+function sendMessage() {
     const input = document.getElementById("input-message");
     if (isNullOrWhitespace(input.value)) {
         alert("Eingabefeld ist leer!");
@@ -146,7 +149,7 @@ window.addEventListener("load", function (e) {
             xmlhttp.open("GET", window.chatServer + "/" + window.chatCollectionId + "/message/" + window.chatPartner, true);
             xmlhttp.setRequestHeader('Authorization', 'Bearer ' + window.chatToken);
             xmlhttp.send();
-        }, 1000);
+        }, 2000);
     }
 });
 
