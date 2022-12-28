@@ -23,7 +23,7 @@ class BackendService {
             $_SESSION['chat_token'] = $result->token;
             return true;
         } catch (\Exception $e) {
-            echo "Authentication failed, error: " . $e . "<br>";
+            //echo "Authentication failed, error: " . $e . "<br>";
             return false;
         }
     }
@@ -36,7 +36,7 @@ class BackendService {
             $_SESSION['chat_token'] = $result->token;
             return true;
         } catch (\Exception $e) {
-            echo "Registration failed, error: " . $e . "<br>";
+            //echo "Registration failed, error: " . $e . "<br>";
             return false;
         }
     }
@@ -46,7 +46,7 @@ class BackendService {
             $result = HttpClient::get($this->url . "/user/" . $username, $_SESSION['chat_token']);
             return User::fromJson($result);
         } catch (\Exception $e) {
-            echo "Error while loading list: " . $e . "<br>";
+            //echo "Error while loading list: " . $e . "<br>";
             return null;
         }
     }
@@ -60,7 +60,7 @@ class BackendService {
                 $_SESSION['chat_token']);
            return true;
         } catch (\Exception $e) {
-            echo "Error while saving user: " . $e . "<br>";
+            //echo "Error while saving user: " . $e . "<br>";
             return false;
         }
     }
@@ -75,7 +75,7 @@ class BackendService {
             unset($value);
             return $friendList;
         } catch (\Exception $e) {
-            echo "Error while loading friends: " . $e . "<br>";
+            //echo "Error while loading friends: " . $e . "<br>";
             return null;
         }
     }
@@ -85,7 +85,7 @@ class BackendService {
             HttpClient::post($this->url . "/friend", $friend, $_SESSION['chat_token']);
             return true;
         } catch (\Exception $e) {
-            echo "Error while requesting " . $friend->getUsername() . ": " . $e . "<br>";
+            //echo "Error while requesting " . $friend->getUsername() . ": " . $e . "<br>";
             return false;
         }
     }
@@ -96,7 +96,7 @@ class BackendService {
                 array("status" => "accepted"), $_SESSION['chat_token']);
             return true;
         } catch (\Exception $e) {
-            echo "Error while accepting request from " . $friend->getUsername() . ": " . $e . "<br>";
+            //echo "Error while accepting request from " . $friend->getUsername() . ": " . $e . "<br>";
             return false;
         }
     }
@@ -107,7 +107,7 @@ class BackendService {
                 array("status" => "dismissed"), $_SESSION['chat_token']);
             return true;
         } catch (\Exception $e) {
-            echo "Error while dismissing request from " . $friend->getUsername() . ": " . $e . "<br>";
+            //echo "Error while dismissing request from " . $friend->getUsername() . ": " . $e . "<br>";
             return false;
         }
     }
@@ -117,7 +117,7 @@ class BackendService {
             HttpClient::delete($this->url . "/friend/" . $friend->getUsername(), $_SESSION['chat_token']);
             return true;
         } catch (\Exception $e) {
-            echo "Error while deleting " . $friend->getUsername() . ": " . $e . "<br>";
+            //echo "Error while deleting " . $friend->getUsername() . ": " . $e . "<br>";
             return false;
         }
     }
@@ -135,7 +135,7 @@ class BackendService {
         try {
             return HttpClient::get($this->url . "/unread", $_SESSION['chat_token']);
         } catch (\Exception $e){
-            echo "Error while fetching unread messages: " . $e . "<br>";
+            //echo "Error while fetching unread messages: " . $e . "<br>";
             return null;
         }
     }

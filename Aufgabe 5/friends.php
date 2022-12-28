@@ -67,7 +67,7 @@ if (sizeof($request) != 0) {
         <a class="good-a" href="logout.php">&lt; Logout</a> | <a class="good-a" href="settings.php">Settings</a>
         <hr>
         <div class="round-border">
-            <?php echo count($acceptedFriends) == 0 ? "No friends :(" : "" ?>
+            <?php echo count($acceptedFriends) == 0 ? "<p style='text-align: center'>No friends :(</p>" : "" ?>
             <ul id="friend-list">
                 <?php foreach ($acceptedFriends as $friend) { ?>
                 <a href="chat.php?username=<?= $friend->getUsername() ?>" class="friend-list-name">

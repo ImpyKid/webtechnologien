@@ -5,6 +5,8 @@ if (isset($_SESSION['user'])) {
     exit();
 }
 
+$message = "";
+
 if($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST['fname'];
     $password = $_POST['fpwd'];
@@ -14,6 +16,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 
         header("Location: friends.php");
         exit();
+    } else {
+        $message = "Authentication failed";
     }
 }
 ?>
@@ -35,7 +39,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
             <h1>Please sign in</h1>
         </div>
 
-        <form method="post">
+        <p class="error-message"><?= $message ?></p>
+
+        <form method="post" action="login.php">
             <fieldset>
                 <legend>Login</legend>
                 <table>
@@ -52,7 +58,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                             <label for="fpwd">Password</label>
                         </td>
                         <td>
-                            <input type="text" id="fpwd" name="fpwd" placeholder="Password">
+                            <input type="password" id="fpwd" name="fpwd" placeholder="Password">
                         </td>
                     </tr>
                 </table>

@@ -184,6 +184,11 @@ p.chat-time {
     left: 50%;
 }
 
+.error-message {
+    color: red;
+    text-align: center;
+}
+
 .flexbox {
     display: flex;
     width: 100%;
